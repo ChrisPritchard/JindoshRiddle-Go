@@ -68,3 +68,11 @@ type description struct {
 	drinking drink
 	owns     heirloom
 }
+
+type isTrue [2]interface{}
+
+type notTrue [2]interface{}
+
+type nextTo [2]interface{}
+
+type leftOf [2]interface{}
