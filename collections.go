@@ -26,3 +26,35 @@ func allPossibilities() (results []description) {
 
 	return
 }
+
+func noConflict(a, b description) bool {
+	return a.position != b.position && a.woman != b.woman && a.wearing != b.wearing && a.from != b.from && a.drinking != b.drinking && a.owns != b.owns
+}
+
+func distinctGroups(group, allPeople []description) [][]description {
+	if len(group) == 5 {
+		return [][]description{group}
+	}
+	results := [][]description{}
+	for _, p := range allPeople {
+		valid := true
+		for _, op := range group {
+			if !noConflict(p, op) {
+				valid = false
+				break
+			}
+		}
+		if !valid {
+			continue
+		}
+
+		// TODO exclude person from allPeople?
+		for _, ng := range distinctGroups(append(group, p), allPeople) {
+			results = append(results, ng)
+		}
+	}
+
+	// TODO distinct?
+
+	return results
+}
