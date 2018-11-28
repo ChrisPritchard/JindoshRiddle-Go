@@ -59,3 +59,12 @@ const (
 	fraeport hometown = 3
 	karnaca  hometown = 4
 )
+
+type description struct {
+	position position
+	woman    women
+	wearing  colours
+	from     hometown
+	drinking drink
+	owns     heirloom
+}
