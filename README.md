@@ -1,5 +1,7 @@
 # JindoshRiddle
 
+## !!! Work In Progress !!!
+
 The Jindosh Riddle from Dishonered 2, solved using a **Go** bruteforce search.
 
 __IMPORTANT!__ Those clever game devs have set it up so the puzzle is different each time. The text below is from my latest playthrough. In order to solve another puzzle, you will need to modify the contents of rules.go
