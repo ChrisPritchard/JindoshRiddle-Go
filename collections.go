@@ -55,6 +55,5 @@ func distinctGroups(group, allPeople []description) [][]description {
 	}
 
 	// TODO distinct?
-
 	return results
 }
