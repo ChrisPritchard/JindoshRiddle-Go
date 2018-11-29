@@ -18,3 +18,32 @@ func applies(subject interface{}, description description) bool {
 		return false
 	}
 }
+
+func ruleDoesNotForbid(testable, rule interface{}) bool {
+	switch testable.(type) {
+	case description:
+		{
+			desc := testable.(description)
+			switch rule.(type) {
+			case isTrue:
+				{
+					if applies(rule.(isTrue).subject, desc) {
+						return applies(rule.(isTrue).targetOrFact, desc)
+					} else {
+						return !applies(rule.(isTrue).targetOrFact, desc)
+					}
+				}
+			case notTrue:
+				{
+					return !applies(rule.(notTrue).subject, desc) || !applies(rule.(notTrue).targetOrFact, desc)
+				}
+			default:
+				return true
+			}
+		}
+	case []description:
+		return true
+	default:
+		return true
+	}
+}

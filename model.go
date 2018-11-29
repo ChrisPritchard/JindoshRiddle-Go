@@ -69,10 +69,16 @@ type description struct {
 	owns     heirloom
 }
 
-type isTrue [2]interface{}
+type rule struct {
+	subject, targetOrFact interface{}
+}
 
-type notTrue [2]interface{}
+type isTrue rule
 
-type nextTo [2]interface{}
+type notTrue rule
 
-type leftOf [2]interface{}
+type nextTo rule
+
+type leftOf rule
+
+type rightOf rule
