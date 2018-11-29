@@ -70,7 +70,7 @@ type description struct {
 }
 
 type rule struct {
-	subject, targetOrFact interface{}
+	subject, target interface{}
 }
 
 type isTrue rule

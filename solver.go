@@ -1,5 +1,9 @@
 package main
 
+import (
+	"sort"
+)
+
 func applies(subject interface{}, description description) bool {
 	switch subject.(type) {
 	case women:
@@ -23,26 +27,68 @@ func ruleDoesNotForbid(testable, rule interface{}) bool {
 	switch testable.(type) {
 	case description:
 		{
-			desc := testable.(description)
+			person := testable.(description)
 			switch rule.(type) {
 			case isTrue:
 				{
-					if applies(rule.(isTrue).subject, desc) {
-						return applies(rule.(isTrue).targetOrFact, desc)
+					r := rule.(isTrue)
+					if applies(r.subject, person) {
+						return applies(r.target, person)
 					} else {
-						return !applies(rule.(isTrue).targetOrFact, desc)
+						return !applies(r.target, person)
 					}
 				}
 			case notTrue:
 				{
-					return !applies(rule.(notTrue).subject, desc) || !applies(rule.(notTrue).targetOrFact, desc)
+					r := rule.(notTrue)
+					return !applies(r.subject, person) || !applies(r.target, person)
+				}
+			case leftOf:
+				{
+					r := rule.(leftOf)
+					return ruleDoesNotForbid(testable, notTrue{r.subject, r.target})
+				}
+			case rightOf:
+				{
+					r := rule.(rightOf)
+					return ruleDoesNotForbid(testable, notTrue{r.subject, r.target})
+				}
+			case nextTo:
+				{
+					r := rule.(nextTo)
+					return ruleDoesNotForbid(testable, notTrue{r.subject, r.target})
 				}
 			default:
 				return true
 			}
 		}
 	case []description:
-		return true
+		{
+			switch rule.(type) {
+			case leftOf:
+				{
+					group := testable.([]description)
+					sort.Slice(group, func(a, b int) bool {
+						return group[a].position < group[b].position
+					})
+
+					r := rule.(leftOf)
+					return ruleDoesNotForbid(testable, notTrue{r.subject, r.target})
+				}
+			case rightOf:
+				{
+					r := rule.(rightOf)
+					return ruleDoesNotForbid(testable, leftOf{r.target, r.subject})
+				}
+			case nextTo:
+				{
+					r := rule.(nextTo)
+					return ruleDoesNotForbid(testable, leftOf{r.subject, r.target}) || ruleDoesNotForbid(testable, leftOf{r.target, r.subject})
+				}
+			default:
+				return true
+			}
+		}
 	default:
 		return true
 	}
