@@ -5,6 +5,11 @@ import (
 )
 
 func main() {
-	all := allPossibilities()
-	fmt.Printf("all posibilites: %d", len(all))
+	//all := allPossibilities()
+
+	var testa interface{}
+	testa = madamNatsiou
+	testb := testa.(hometown)
+
+	fmt.Printf("test: %T %v", testb, testb)
 }
