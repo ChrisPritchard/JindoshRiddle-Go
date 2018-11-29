@@ -73,7 +73,12 @@ func ruleDoesNotForbid(testable, rule interface{}) bool {
 					})
 
 					r := rule.(leftOf)
-					return ruleDoesNotForbid(testable, notTrue{r.subject, r.target})
+					for i := 0; i < len(group)-1; i++ {
+						if applies(r.subject, group[i]) && applies(r.target, group[i+1]) {
+							return true
+						}
+					}
+					return false
 				}
 			case rightOf:
 				{
