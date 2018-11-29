@@ -20,6 +20,14 @@ const (
 	baronessFinch  women = 4
 )
 
+var womanNames = map[women]string{
+	ladyWinslow:    "Lady Winslow",
+	doctorMarcolla: "Doctor Marcolla",
+	countessContee: "Countess Contee",
+	madamNatsiou:   "Madam Natsiou",
+	baronessFinch:  "Baroness Finch",
+}
+
 type colours int
 
 const (
@@ -39,6 +47,14 @@ const (
 	warMedal    heirloom = 3
 	snuffTin    heirloom = 4
 )
+
+var heirloomNames = map[heirloom]string{
+	ring:        "Prized Ring",
+	birdPendant: "Bird Pendant",
+	diamond:     "Diamond",
+	warMedal:    "War Medal",
+	snuffTin:    "Snuff Tin",
+}
 
 type drink int
 

@@ -2,14 +2,19 @@ package main
 
 import (
 	"fmt"
+	"time"
 )
 
 func main() {
-	//all := allPossibilities()
+	start := time.Now()
 
-	var testa interface{}
-	testa = madamNatsiou
-	testb := testa.(hometown)
+	result := solve()
+	for _, v := range result {
+		fmt.Printf("%s owns the %s\n", womanNames[v.woman], heirloomNames[v.owns])
+	}
 
-	fmt.Printf("test: %T %v", testb, testb)
+	elapsed := time.Now().Sub(start)
+
+	fmt.Printf("\n")
+	fmt.Printf("Time taken: %f seconds", elapsed.Seconds())
 }
