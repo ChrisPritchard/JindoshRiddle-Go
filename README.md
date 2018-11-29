@@ -22,8 +22,6 @@ This is a console app. When run, it will brute force combinations, checking each
 
 ## Go vs F#
 
-I originally built this in F# [here](https://github.com/ChrisPritchard/JindoshRiddle). As I have learnt Go, I thought this particular problem would be better solved in that language, which runs much faster (albeit at the cost of F#'s beautiful expressiveness). Both languages are great: I recommend learning both, and using each for their strengths! If anything, these two projects provide a nice comparison of the way the two languages approach things, as they are structured and implemented almost identically.
+I originally built this in F# [here](https://github.com/ChrisPritchard/JindoshRiddle). As I have learnt Go, I thought this particular problem would be better solved in that language, which initially ran much faster (1500x in fact) until I changed the F# solution to use Lists instead of seqs, at which point the difference is only about 40 ms. 
 
-After finishing the build and testing, the Go solution on my Surface Book 2 took on average, 0.1 seconds. I.e. 100 miliseconds or thereabout. The same solution in F# takes between 50 and 150 *seconds*, so much, *much* slower. 
-
-I am guessing if I got better at F#, and particularly if I use some of the newer .NET features like spans, I can get it to run at a closer performance to Go. But if I need to faff about with unmanaged pointers, then perhaps its a sign the particular problem is better suited to a lower-level language? 
+Both languages are great: I recommend learning both, and using each for their strengths! If anything, these two projects provide a nice comparison of the way the two languages approach things, as they are structured and implemented almost identically.
